@@ -1,0 +1,7 @@
+# Ignora la carpeta de data, input, tmp y output
+/data
+/input
+/tmp
+/output
+# Ignora el __pycache__
+__pycache__
