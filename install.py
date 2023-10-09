@@ -37,7 +37,7 @@ if system == 'windows':
         os.system(f'curl -o ./data/masks/{url.split("/")[-1]} {url}')
     
     # Descarga el archivo de prueba de entrada
-    os.system('curl -o ./input/S2A_MSIL2A_20230521T160831_N9999_R140_T16QEJ_20230522T020259.zipS2A_MSIL2A_20210801T161701_N0301_R140_T16QDH_20210801T191654.zip http://132.247.103.145/tmp/sargazo/INEGI_ODC_sargazo/sargazo_test/S2A_MSIL2A_20230521T160831_N9999_R140_T16QEJ_20230522T020259.zip')
+    os.system('curl -o ./input/S2A_MSIL2A_20230521T160831_N9999_R140_T16QEJ_20230522T020259.zip http://132.247.103.145/tmp/sargazo/INEGI_ODC_sargazo/sargazo_test/S2A_MSIL2A_20230521T160831_N9999_R140_T16QEJ_20230522T020259.zip')
 
 # Si es linux
 elif system == 'linux':
@@ -52,7 +52,7 @@ elif system == 'linux':
         os.system(f'wget -O ./data/masks/{url.split("/")[-1]} {url}')
 
     # Descarga el archivo de prueba de entrada
-    os.system('wget -O ./input/S2A_MSIL2A_20230521T160831_N9999_R140_T16QEJ_20230522T020259.zipS2A_MSIL2A_20210801T161701_N0301_R140_T16QDH_20210801T191654.zip http://132.247.103.145/tmp/sargazo/INEGI_ODC_sargazo/sargazo_test/S2A_MSIL2A_20230521T160831_N9999_R140_T16QEJ_20230522T020259.zip')
+    os.system('wget -O ./input/S2A_MSIL2A_20230521T160831_N9999_R140_T16QEJ_20230522T020259.zip http://132.247.103.145/tmp/sargazo/INEGI_ODC_sargazo/sargazo_test/S2A_MSIL2A_20230521T160831_N9999_R140_T16QEJ_20230522T020259.zip')
 
 
 
