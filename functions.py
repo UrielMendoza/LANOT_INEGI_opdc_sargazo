@@ -156,14 +156,46 @@ def listaBandas(pathInput,nivel,resolucion,banda):
     return archivoBanda[0]
 
 def aperturaDS(pathBand):
+    '''
+    Funcion que abre un archivo raster con GDAL
+
+    Parametros
+    ----------
+    pathBand : str
+        Path de entrada de imagenes Sentinel-2
+    '''
     ds = gdal.Open(pathBand)
     return ds
 
 def imgToGeoTIF(ds,tif,pathOutput):
+    '''
+    Funcion que convierte una imagen a GeoTIF con GDAL
+
+    Parametros
+    ----------
+    ds : str
+        Dataset de GDAL
+    tif : str
+        Nombre del archivo GeoTIF
+    pathOutput : str
+        Path de salida de imagenes GeoTIF
+    '''
     print("Pasando a tif: "+pathOutput+tif+'.tif')
     gdal.Translate(pathOutput+tif+'.tif',ds)
 
 def creaTif(dsRef,npy,output):
+    '''
+    Funcion que crea un GeoTIF a partir de un arreglo de numpy
+
+    Parametros
+    ----------
+    dsRef : str
+        Dataset de referencia de GDAL
+    npy : str
+        Arreglo de numpy
+    output : str
+        Path de salida de imagenes GeoTIF
+    '''
     geotransform = dsRef.GetGeoTransform()
     nx = dsRef.RasterXSize
     ny = dsRef.RasterYSize
@@ -177,9 +209,31 @@ def creaTif(dsRef,npy,output):
     dst_ds = None
 
 def remuestrea(pathOutput,ds,dimx,dimy):
+    '''
+    Funcion que remuestrea una imagen con GDAL
+
+    Parametros
+    ----------
+    pathOutput : str
+        Path de salida de imagenes GeoTIF
+    ds : str
+        Dataset de GDAL
+    dimx : int
+        Dimension en x
+    dimy : int 
+        Dimension en y
+    '''
     gdal.Translate(pathOutput,ds,options=gdal.TranslateOptions(xRes=dimx,yRes=dimy))
 
 def obtieneCuadrante(ds):
+    '''
+    Funcion que obtiene el cuadrante de la imagen don un dataset de GDAL
+
+    Parametros
+    ----------
+    ds : str
+        Dataset de GDAL
+    '''
     xSize = ds.RasterXSize
     ySize = ds.RasterYSize
     geo = ds.GetGeoTransform()
@@ -193,6 +247,14 @@ def obtieneCuadrante(ds):
     return [xmin,ymax,xmax,ymin]
 
 def obtieneParametrosGeoTrasform(ds):
+    '''
+    Funcion que obtiene los parametros de geotransformacion de un dataset de GDAL
+
+    Parametros
+    ----------
+    ds : str
+        Dataset de GDAL
+    '''
     geo = ds.GetGeoTransform()
     nx = ds.RasterXSize
     ny = ds.RasterYSize
@@ -206,6 +268,16 @@ def obtieneParametrosGeoTrasform(ds):
     return nx,ny,xmin,ymax,xres,yres,xmax,ymin
 
 def porcNubosidadOceano(df,pathLM):
+    '''
+    Funcion que obtiene el porcentaje de nubosidad en el mar
+
+    Parametros
+    ----------
+    df : str
+        GeoDataFrame de GeoPandas
+    pathLM : str
+        Path de las mascaras de tierra
+    '''
     # Porcentaje de nubosidad solo en el mar
     print("Porcentaje de nubosidad en el mar")
     # Km2

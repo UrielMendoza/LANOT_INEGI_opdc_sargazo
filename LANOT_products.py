@@ -37,9 +37,13 @@ def sargazo(pathInput, pathTmp, pathLM ,pathOutput):
     fechaImaProc = fn.obtieneFechaImaProc(archivo)
     tile = fn.obtieneTile(archivo)
     anio = fn.obtieneAnio(archivo)
-    dirI = fn.nomDir(archivo,'L2A')
     print("Fecha: "+fecha)
     print("Tile: "+tile)
+
+    # Descomprimiendo archivo
+    print('2. Descomprimiendo archivo...')
+    fn.descomprime(archivo,pathTmp)
+    dirI = fn.nomDir(archivo,'L2A')
 
     # Porcentaje de nubes
     print('2. Porcentaje de nubes...')
@@ -66,12 +70,12 @@ def sargazo(pathInput, pathTmp, pathLM ,pathOutput):
     # Pasando a geotiif y remuestreando a 20m
     print('3. Convirtiendo a GeoTIFF y remuestreando a 20m...')
     for banda20 in bandas20m:
-        dirB20 = fn.listaBandas(pathInput+dirI,'L2A','R20m',banda20)
+        dirB20 = fn.listaBandas(pathTmp+dirI,'L2A','R20m',banda20)
         dsB20 = fn.aperturaDS(dirB20)
         fn.imgToGeoTIF(dsB20,banda20,pathTmp)
     for banda10 in bandas10m:
         print(banda10)
-        dirB10 = fn.listaBandas(pathInput+dirI,'L2A','R10m',banda10)
+        dirB10 = fn.listaBandas(pathTmp+dirI,'L2A','R10m',banda10)
         dsB10 = fn.aperturaDS(dirB10)
         fn.imgToGeoTIF(dsB10,banda10,pathTmp)
         fn.remuestrea(pathTmp+banda10+'_20.tif',dsB10,20,20)
