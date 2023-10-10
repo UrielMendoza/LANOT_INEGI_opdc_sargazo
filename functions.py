@@ -322,11 +322,11 @@ def nubesMascara(cuadrante,bufferNubes,pathSCL,pathLM,pathTmp):
         df.geometry[idx] = new_poly
     df = df[df['DN'] == 1]
     # Porcentaje nubosidad oceano
-    porcNubeOceano = porcNubosidadOceano(df, pathLM)
+    #porcNubeOceano = porcNubosidadOceano(df, pathLM)
     if len(df) == 0:
         print("No buffer de nubes")
         banderaNub = False
-        return banderaNub,porcNubeOceano
+        return banderaNub#,porcNubeOceano
     else:
         print("Buffer de nubes")
         banderaNub = True
@@ -340,7 +340,7 @@ def nubesMascara(cuadrante,bufferNubes,pathSCL,pathLM,pathTmp):
         res_difference.to_file(pathTmp+"cloudMaskShadow_b250_bin_rec_tmp.json", driver='GeoJSON')
 
 
-        return banderaNub,porcNubeOceano
+        return banderaNub#,porcNubeOceano
     
 def sargazoBinNumpy(pathInput):
     b11 = aperturaDS(pathInput+'B11.tif').ReadAsArray().astype(np.int16)

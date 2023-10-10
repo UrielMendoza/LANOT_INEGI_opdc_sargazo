@@ -87,8 +87,8 @@ def sargazo(pathInput, pathTmp, pathLM ,pathOutput):
 
     # Mascara de nubes altas
     print('5. Mascara de nubes altas...')
-    banderaNub,porcNubeOceano = fn.nubesMascara(cuadrante,bufferNubes,pathTmp+bandas20m[-1]+'.tif',pathLM,pathTmp)
-    print("Porcentaje de nubes oceanico: ",porcNubeOceano)
+    #banderaNub,porcNubeOceano = fn.nubesMascara(cuadrante,bufferNubes,pathTmp+bandas20m[-1]+'.tif',pathLM,pathTmp)
+    banderaNub = fn.nubesMascara(cuadrante,bufferNubes,pathTmp+bandas20m[-1]+'.tif',pathLM,pathTmp)
 
     # Algortimo de sargazo
     print('6. Algoritmo de sargazo...')
