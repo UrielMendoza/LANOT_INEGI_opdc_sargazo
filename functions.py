@@ -336,6 +336,7 @@ def nubesMascara(cuadrante,bufferNubes,pathSCL,pathLM,pathTmp):
         df = gpd.GeoDataFrame(crs=df.crs, geometry=[df_g])
         # Elimina el buffer cerca de las costas
         df_mask = gpd.read_file(pathLM+'land_2_UTM16N_20m_SPlaya_b100m_2021.geojson')
+        print(df_mask.head())
         res_difference = gpd.overlay(df, df_mask, how='difference')
         res_difference.to_file(pathTmp+"cloudMaskShadow_b250_bin_rec_tmp.json", driver='GeoJSON')
 
