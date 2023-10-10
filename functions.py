@@ -450,6 +450,8 @@ def filtroPixel(dsRef,dsSar,nubeBaja,entropia,dsSCL,SNbuffer,pathTmp,pathLM):
     # Sin buffer de nubes
     print('Filtrados Nubes: ',contNubes)
 
+    return nuMask
+
 def poligonizacion(tile,anio,fecha,pathLM,pathInput,pathOutput):
     time = datetime.datetime.strptime(fecha,'%Y%m%dT%H%M%S')
     fechaDia = time.strftime('%Y-%m-%d')

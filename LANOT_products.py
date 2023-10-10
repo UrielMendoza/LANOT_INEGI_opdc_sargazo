@@ -106,18 +106,18 @@ def sargazo(pathInput, pathTmp, pathLM ,pathOutput):
     del nuMask
 
     # Poligonizacion
-    print('6. Procesando poligonizacion...')
+    print('9. Procesando poligonizacion...')
     archivoProc,banderaSar = fn.poligonizacion(tile,anio,fecha,pathLM,pathTmp,pathOutput)
 
     # Aplicacion de mascaras vectoriales
     if banderaSar == True:
-        print('7. Aplicando mascaras vectoriales...')
+        print('10. Aplicando mascaras vectoriales...')
         banderaSar, totalSarMask, archivoProc = fn.mascarasVectoriales(2,tile,anio,fecha,fechaImaProc,SNbuffer,pathLM,pathTmp,pathOutput)
 
         banderaSar_log = 'si'
         totalSar = totalSarMask
 
-        print('8. Creando archivos extra de salida...')
+        print('11. Creando archivos extra de salida...')
         # Vertices
         fn.obtieneVertices(archivoProc,pathOutput+'sargazo_vertices/')
         # Centroides
@@ -133,7 +133,7 @@ def sargazo(pathInput, pathTmp, pathLM ,pathOutput):
         totalSar = '0'
 
     # Compuesto RGB
-    print('9. Creando compuestos RGB...')
+    print('12. Creando compuestos RGB...')
     os.system('mkdir -p '+pathOutput+'sargazo/'+tile+'/')                
     fn.RGB(pathTmp+bandas20m[4]+'.tif',pathTmp+bandas20m[3]+'.tif',pathTmp+bandas20m[2]+'.tif',tile,anio,fecha,fechaImaProc,pathOutput,pathTmp)
     os.system('mkdir -p '+pathOutput+'TC/'+tile+'/')
