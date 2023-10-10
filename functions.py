@@ -9,6 +9,8 @@ from shapely.geometry import Polygon, Point, MultiPoint, MultiPolygon
 import numpy as np
 import zipfile
 import shutil
+from skimage.filters.rank import entropy
+from skimage.morphology import disk
 
 def tipoCompresion(pathInput):
     '''
@@ -282,6 +284,13 @@ def obtieneParametrosGeoTrasform(ds):
     ymin = ymax + yres*ny
 
     return nx,ny,xmin,ymax,xres,yres,xmax,ymin
+
+def entropiaNumpy(pathInput):
+    ds = gdal.Open(pathInput+'B12.tif')
+    b12 = ds.ReadAsArray()
+    entropia = entropy(b12, disk(5))
+    creaTif(ds,entropia,pathInput+'b12_entropia.tif')
+    return entropia
 
 def porcNubosidadOceano(df,pathLM):
     '''
