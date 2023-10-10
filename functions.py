@@ -7,6 +7,8 @@ import geopandas as gpd
 import os
 from shapely.geometry import Polygon, Point, MultiPoint, MultiPolygon
 import numpy as np
+import zipfile
+import shutil
 
 def tipoCompresion(pathInput):
     '''
@@ -33,8 +35,14 @@ def descomprime(pathInput,pathOutput):
     if compresion == 'gz':
         os.system('tar -xvzf '+pathInput+' -C '+pathOutput)
     elif compresion == 'zip':
-        os.system('unzip '+pathInput+' -d '+pathOutput)
-
+        system = os.name
+        if system == 'nt':
+            # Descomprimir el archivo ZIP
+            with zipfile.ZipFile(pathInput, 'r') as zip_ref:
+                # Extraer todo el contenido en la carpeta de destino
+                zip_ref.extractall(pathOutput)
+        elif system == 'posix':
+            os.system('unzip '+pathInput+' -d '+pathOutput)
 def listaArchivos(pathInput):
     '''
     Funcion para enlistar archivos de un directorio
@@ -58,7 +66,11 @@ def nomDir(pathInput,nivel):
     nivel : str
         Nivel de procesamiento de Sentinel-2
     '''
-    archivo = pathInput.split('/')[-1].split('.')[0]
+    system = os.name
+    if system == 'nt':
+        archivo = pathInput.split('\\')[-1].split('.')[0]
+    elif system == 'posix':
+        archivo = pathInput.split('/')[-1].split('.')[0]
     if nivel == 'L2A':
         return archivo+'.SAFE'
     elif nivel == 'L1C':
@@ -126,7 +138,11 @@ def obtienePorcentajeNube(pathInput):
     pathInput : str
         Path de entrada de imagenes Sentinel-2
     '''
-    mydoc = minidom.parse(pathInput+'/MTD_MSIL2A.xml')
+    system = os.name
+    if system == 'nt':
+        mydoc = minidom.parse(pathInput+'\\MTD_MSIL2A.xml')
+    elif system == 'posix':
+        mydoc = minidom.parse(pathInput+'/MTD_MSIL2A.xml')
     items = mydoc.getElementsByTagName('n1:Quality_Indicators_Info')
     porcNube = float(items[0].getElementsByTagName('Cloud_Coverage_Assessment')[0].firstChild.nodeValue)
     return porcNube

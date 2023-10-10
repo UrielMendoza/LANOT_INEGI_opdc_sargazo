@@ -21,7 +21,7 @@ def sargazo(pathInput, pathTmp, pathLM ,pathOutput):
     pathOutput : str
         Path de salida de archivos de salida
     '''
-
+    
     # Referencias de bandas
     bandas20m = ('B02','B03','B04','B05','B8A','B11','B12','SCL')
     bandas10m = ['B08']
@@ -29,7 +29,8 @@ def sargazo(pathInput, pathTmp, pathLM ,pathOutput):
     # Path de archivos
     print('1. Enlistado de archivos...')
     archivo = fn.listaArchivos(pathInput+'/*')
-    archivo = archivo[1]
+    print(archivo)
+    archivo = archivo[0]
 
     # Obtencion de datos
     fecha = fn.obtieneFecha(archivo)
@@ -39,9 +40,7 @@ def sargazo(pathInput, pathTmp, pathLM ,pathOutput):
     anio = fn.obtieneAnio(archivo)
     print("Fecha: "+fecha)
     print("Tile: "+tile)
-
     # Descomprimiendo archivo
-    print('2. Descomprimiendo archivo...')
     fn.descomprime(archivo,pathTmp)
     dirI = fn.nomDir(archivo,'L2A')
 
