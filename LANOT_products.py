@@ -120,13 +120,13 @@ def sargazo(pathInput, pathTmp, pathLM ,pathOutput):
         print('11. Creando archivos extra de salida...')
         # Vertices
         os.system('mkdir -p '+pathOutput+tile+'/sagazo_vertices/')
-        fn.obtieneVertices(archivoProc,pathOutput+tile+'sargazo_vertices/')
+        fn.obtieneVertices(archivoProc,pathOutput+tile+'/sargazo_vertices/')
         # Centroides
         os.system('mkdir -p '+pathOutput+tile+'/sargazo_centroides/')
-        fn.obtieneCentroides(archivoProc,pathOutput+tile+'sargazo_centroides/',pathLM)
+        fn.obtieneCentroides(archivoProc,pathOutput+tile+'/sargazo_centroides/',pathLM)
         # Segmentado
         os.system('mkdir -p '+pathOutput+tile+'/sargazo_segmentados/')
-        fn.obtieneSegmentado(archivoProc,pathOutput+tile+'sargazo_segmentados/',pathLM)
+        fn.obtieneSegmentado(archivoProc,pathOutput+tile+'/sargazo_segmentados/',pathLM)
         # CSV
         archivoCSV, crs = fn.creaCSV(archivoProc,pathTmp)
     
