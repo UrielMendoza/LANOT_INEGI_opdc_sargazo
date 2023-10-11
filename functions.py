@@ -632,11 +632,11 @@ def creaCSV(pathInput,pathOutput):
     return archivoCSV,crs
 
 def RGB(r,g,b,tile,anio,fecha,fechaProc,pathOutputGeoTiff,pathTmp):
-    nombre = pathOutputGeoTiff+'sargazo/'+tile+'/'+'S2_MSI_SAR_'+tile+'_'+fecha+'_'+fechaProc+".tif"
+    nombre = pathOutputGeoTiff+'rgb/sargazo/'+tile+'/'+'S2_MSI_SAR_'+tile+'_'+fecha+'_'+fechaProc+".tif"
     os.system('gdal_merge.py -separate -co PHOTOMETRIC=RGB -o '+nombre+' '+r+' '+g+' '+b)
 
 def RGB_TC(tile,anio,fecha,fechaProc,nivel,resolucion,pathInput,pathOutputGeoTiff,pathTmp):
     dirTC = listaBandas(pathInput,nivel,resolucion,'TCI')
-    nombre = pathOutputGeoTiff+'TC/'+tile+'/'+'S2_MSI_TC_'+tile+'_'+fecha+'_'+fechaProc+'.tif'
+    nombre = pathOutputGeoTiff+'rgb/TC/'+tile+'/'+'S2_MSI_TC_'+tile+'_'+fecha+'_'+fechaProc+'.tif'
     os.system('gdal_translate '+dirTC+' '+nombre)
 

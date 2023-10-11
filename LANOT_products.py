@@ -112,18 +112,18 @@ def sargazo(pathInput, pathTmp, pathLM ,pathOutput):
     # Aplicacion de mascaras vectoriales
     if banderaSar == True:
         print('10. Aplicando mascaras vectoriales...')
-        banderaSar, totalSarMask, archivoProc = fn.mascarasVectoriales(2,tile,anio,fecha,fechaImaProc,SNbuffer,pathLM,pathTmp,pathOutput)
+        banderaSar, totalSarMask, archivoProc = fn.mascarasVectoriales(1,tile,anio,fecha,fechaImaProc,SNbuffer,pathLM,pathTmp,pathOutput)
 
         banderaSar_log = 'si'
         totalSar = totalSarMask
 
         print('11. Creando archivos extra de salida...')
         # Vertices
-        fn.obtieneVertices(archivoProc,pathOutput+'sargazo_vertices/')
+        fn.obtieneVertices(archivoProc,pathOutput+tile+'/sargazo_vertices/')
         # Centroides
-        fn.obtieneCentroides(archivoProc,pathOutput+'sargazo_centroides/',pathLM)
+        fn.obtieneCentroides(archivoProc,pathOutput+tile+'/sargazo_centroides/',pathLM)
         # Segmentado
-        fn.obtieneSegmentado(archivoProc,pathOutput+'sargazo_segmentados/',pathLM)
+        fn.obtieneSegmentado(archivoProc,pathOutput+tile+'/sargazo_segmentados/',pathLM)
         # CSV
         archivoCSV, crs = fn.creaCSV(archivoProc,pathTmp)
     
@@ -134,13 +134,15 @@ def sargazo(pathInput, pathTmp, pathLM ,pathOutput):
 
     # Compuesto RGB
     print('12. Creando compuestos RGB...')
-    os.system('mkdir -p '+pathOutput+'sargazo/'+tile+'/')                
+    os.system('mkdir -p '+pathOutput+'rgb/sargazo/'+tile+'/')                
     fn.RGB(pathTmp+bandas20m[4]+'.tif',pathTmp+bandas20m[3]+'.tif',pathTmp+bandas20m[2]+'.tif',tile,anio,fecha,fechaImaProc,pathOutput,pathTmp)
-    os.system('mkdir -p '+pathOutput+'TC/'+tile+'/')
+    os.system('mkdir -p '+pathOutput+'rgb/TC/'+tile+'/')
     fn.RGB_TC(tile,anio,fecha,fechaImaProc,'L2A','R10m',pathTmp+dirI,pathOutput,pathTmp)
 
     # Borrado de archivos temporales
     os.system('rm -r '+pathTmp+'*json')
     os.system('rm -r '+pathTmp+'*.csv')
+    os.system('rm -r '+pathTmp+'*.xml')
     os.system('rm -r '+pathTmp+'*.zip')
+    os.system('rm -r '+pathTmp+'*.tif')
     os.system('rm -r '+pathTmp+'*.SAFE')

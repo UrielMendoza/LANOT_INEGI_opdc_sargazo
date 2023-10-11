@@ -30,6 +30,12 @@ if system == 'windows':
     os.system('mkdir .\\data\\masks\\')
     os.system('mkdir .\\input\\')
     os.system('mkdir .\\output\\')
+    os.system('mkdir .\\output\\rgb\\')
+    os.system('mkdir .\\output\\rgb\\sargazo\\')
+    os.system('mkdir .\\output\\rgb\\TC\\')
+    os.system('mkdir .\\output\\sargazo_centroides\\')
+    os.system('mkdir .\\output\\sargazo_segmentados\\')
+    os.system('mkdir .\\output\\sargazo_vertices\\')
     os.system('mkdir .\\tmp\\')
 
     # Descarga los archivos necesarios
@@ -45,6 +51,12 @@ elif system == 'linux':
     os.system('mkdir -p ./data/masks/')
     os.system('mkdir -p ./input/')
     os.system('mkdir -p ./output/')
+    os.system('mkdir -p ./output/rgb/')
+    os.system('mkdir -p ./output/rgb/sargazo/')
+    os.system('mkdir -p ./output/rgb/TC/')
+    os.system('mkdir -p ./output/sargazo_centroides/')
+    os.system('mkdir -p ./output/sargazo_segmentados/')
+    os.system('mkdir -p ./output/sargazo_vertices/')
     os.system('mkdir -p ./tmp/')
 
     # Descarga los archivos necesarios
